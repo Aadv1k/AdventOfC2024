@@ -2,8 +2,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define INPUT_FILE "./sample.txt"
-
 void bubble_sort(int* items, int length) {
     for (int i = 0; i < length - 1; i++) {
         for (int j = 0; j <= length - i - 1; j++) {
@@ -16,8 +14,8 @@ void bubble_sort(int* items, int length) {
     }
 }
 
-void do_part1() {
-    FILE *fp = fopen(INPUT_FILE, "r");
+int day01_part01(const char* from_file) {
+    FILE *fp = fopen(from_file, "r");
 
     int lineCount = 0;
     while (!feof(fp)) {
@@ -26,7 +24,6 @@ void do_part1() {
 
     int* list1 = (int*)malloc(sizeof(int) * lineCount);
     int* list2 = (int*)malloc(sizeof(int) * lineCount);
-
 
     rewind(fp);
 
@@ -49,15 +46,11 @@ void do_part1() {
         result += abs(list1[i] - list2[i]);
     }
 
-    printf("The sum of all differences is %d\n", result);
 
     free((void*)list1);
     free((void*)list2);
 
     fclose(fp);
-}
 
-
-int main() {
-    do_part1();
+    return result;
 }
